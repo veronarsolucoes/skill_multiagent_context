@@ -1,0 +1,230 @@
+{
+  "update_current_state": {
+    "current_phase": "workflow_hardening",
+    "current_goal": "Fortalecer validacoes e padroes para detectar divergencias entre .ai, MCP e Obsidian",
+    "active_task_id": "TASK-006",
+    "last_completed_task_id": "TASK-005",
+    "next_recommended_step": "Implementar validacoes de consistencia e checklist de integridade para fases",
+    "recommended_agent": "Codex",
+    "key_files": [
+      "README.md",
+      ".ai/context/obsidian-sync-runner.mjs",
+      ".ai/context/manifests/phase-3-complete.json",
+      ".ai/state/current-state.json",
+      ".ai/state/active-task.json",
+      ".ai/tasks/TASK-006.md",
+      ".ai/handoffs/HANDOFF-006.md"
+    ],
+    "known_blockers": [],
+    "last_updated_by": "Codex",
+    "last_updated_at": "2026-04-17T15:38:54-03:00"
+  },
+  "append_current_state_arrays": {
+    "recent_decisions": [
+      "Sincronizacao do Obsidian automatizada com obsidian-sync-runner",
+      "Encerrar fase com transicao automatica via manifest e validacao final"
+    ]
+  },
+  "update_active_task": {
+    "task_id": "TASK-006",
+    "title": "Fase 4 - Endurecimento do fluxo",
+    "status": "in_progress",
+    "owner_agent": "Codex",
+    "summary": "Adicionar validacoes de consistencia e reforcar padroes de continuidade entre .ai, MCP e Obsidian.",
+    "inputs": [
+      ".ai/tasks/TASK-005.md",
+      ".ai/handoffs/HANDOFF-005.md",
+      ".ai/state/current-state.json",
+      ".ai/state/active-task.json",
+      ".ai/state/roadmap.json",
+      ".ai/context/obsidian-sync-runner.mjs"
+    ],
+    "outputs": [
+      "Checklist de consistencia de fase",
+      "TASK-006.md",
+      "HANDOFF-006.md",
+      "Atualizacoes de docs e indices para hardening"
+    ],
+    "files_involved": [
+      "README.md",
+      ".ai/state/current-state.json",
+      ".ai/state/active-task.json",
+      ".ai/state/roadmap.json",
+      ".ai/tasks/TASK-006.md",
+      ".ai/handoffs/HANDOFF-006.md",
+      ".ai/indexes/file-index.md",
+      ".ai/indexes/api-index.md",
+      ".ai/logs/codex.md",
+      ".ai/logs/timeline.md"
+    ],
+    "next_step": "Definir e aplicar validacoes de consistencia para arquivos obrigatorios e espelhos",
+    "handoff_ready": true
+  },
+  "roadmap_phase_status": {
+    "phase-3": "completed",
+    "phase-4": "in_progress"
+  },
+  "status_updates": [
+    {
+      "path": ".ai/tasks/TASK-005.md",
+      "frontmatter": {
+        "status": "completed",
+        "last_updated": "2026-04-17"
+      },
+      "append_sections": [
+        {
+          "title": "Encerramento da tarefa",
+          "bullets": [
+            "resultado: concluida",
+            "espelhamento do Obsidian executado por runner dedicado",
+            "vault sincronizado com task/handoff/contexto/decisoes e snapshot de estado",
+            "continuidade aberta em `.ai/tasks/TASK-006.md`"
+          ]
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "path": ".ai/tasks/TASK-006.md",
+      "frontmatter": {
+        "title": "TASK-006",
+        "purpose": "Fase 4 - Endurecimento do fluxo.",
+        "status": "active",
+        "owner": "Codex",
+        "last_updated": "2026-04-17",
+        "related_files": [
+          ".ai/state/current-state.json",
+          ".ai/state/active-task.json",
+          ".ai/state/roadmap.json",
+          ".ai/handoffs/HANDOFF-006.md"
+        ],
+        "tags": [
+          "task",
+          "hardening",
+          "validation",
+          "continuity"
+        ]
+      },
+      "heading": "TASK-006 - Fase 4 - Endurecimento do fluxo",
+      "sections": [
+        {
+          "title": "Contexto",
+          "bullets": [
+            "fase atual: `workflow_hardening`",
+            "origem: continuidade apos conclusao da Fase 3 (obsidian_sync)",
+            "objetivo: prevenir divergencias de estado entre fontes operacionais"
+          ]
+        },
+        {
+          "title": "Objetivo tecnico",
+          "text": "Implementar validacoes de consistencia para estado, tarefa ativa, roadmap, handoff mais recente e espelhos do Obsidian."
+        },
+        {
+          "title": "Proximo passo recomendado",
+          "bullets": [
+            "definir checklist automatizavel de integridade",
+            "validar presenca e formato dos arquivos obrigatorios",
+            "detectar discrepancias entre `.ai/state` e espelhos no `obsidian-vault`",
+            "registrar resultado no handoff da fase"
+          ]
+        },
+        {
+          "title": "Handoff",
+          "bullets": [
+            "proximo agente sugerido: Codex",
+            "arquivos prioritarios: `.ai/state/current-state.json`, `.ai/state/active-task.json`, `.ai/handoffs/HANDOFF-006.md`, `README.md`"
+          ]
+        }
+      ]
+    },
+    {
+      "path": ".ai/handoffs/HANDOFF-006.md",
+      "frontmatter": {
+        "title": "HANDOFF-006",
+        "purpose": "Continuidade apos conclusao da Fase 3 e inicio da Fase 4.",
+        "status": "active",
+        "owner": "Codex",
+        "last_updated": "2026-04-17",
+        "related_files": [
+          ".ai/state/current-state.json",
+          ".ai/state/active-task.json",
+          ".ai/state/roadmap.json",
+          ".ai/tasks/TASK-006.md",
+          "README.md"
+        ],
+        "tags": [
+          "handoff",
+          "continuity",
+          "hardening"
+        ]
+      },
+      "heading": "HANDOFF-006",
+      "sections": [
+        {
+          "title": "Estado atual",
+          "bullets": [
+            "Fase 3 concluida com espelhamento automatizado no Obsidian",
+            "Fase 4 iniciada para reforcar validacoes do fluxo"
+          ]
+        },
+        {
+          "title": "O que acabou de ser feito",
+          "bullets": [
+            "implementado `.ai/context/obsidian-sync-runner.mjs`",
+            "executado sync de task, handoff, contexto, decisoes e snapshot no vault",
+            "aplicada transicao automatica via manifesto `phase-3-complete`"
+          ]
+        },
+        {
+          "title": "O que falta fazer",
+          "bullets": [
+            "definir validacoes de consistencia obrigatorias por fase",
+            "padronizar verificacao de divergencia entre `.ai/` e Obsidian",
+            "registrar criterios de aprovacao para handoff de fase"
+          ]
+        },
+        {
+          "title": "Proxima acao recomendada",
+          "text": "Implementar checklist de hardening com validacao automatica de integridade."
+        },
+        {
+          "title": "Arquivos prioritarios para leitura",
+          "bullets": [
+            "`.ai/tasks/TASK-006.md`",
+            "`.ai/state/current-state.json`",
+            "`.ai/state/active-task.json`",
+            "`.ai/state/roadmap.json`",
+            "`README.md`"
+          ]
+        },
+        {
+          "title": "Proximo agente sugerido",
+          "text": "Codex"
+        }
+      ]
+    }
+  ],
+  "append_logs": {
+    "codex": [
+      "2026-04-17: implementado runner de sync Obsidian em `.ai/context/obsidian-sync-runner.mjs`.",
+      "2026-04-17: manifesto `phase-3-complete` executado para transicao automatica TASK-005 -> TASK-006."
+    ],
+    "timeline": [
+      "2026-04-17: Fase 3 concluida com sync automatizado do Obsidian.",
+      "2026-04-17: Fase 4 iniciada (workflow_hardening) com TASK-006/HANDOFF-006."
+    ]
+  },
+  "append_memory": {
+    "decisions": [
+      "2026-04-17: adotar runner dedicado para espelhamento do Obsidian.",
+      "2026-04-17: encerrar fases com execucao automatica + validacao JSON."
+    ],
+    "patterns": [
+      "Executar obsidian-sync-runner antes de concluir a fase de espelhamento."
+    ],
+    "blockers": [
+      "2026-04-17: sem bloqueios ativos apos conclusao da Fase 3."
+    ]
+  }
+}

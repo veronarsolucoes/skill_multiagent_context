@@ -1,0 +1,239 @@
+{
+  "ok": true,
+  "dry_run": false,
+  "generated_at": "2026-04-18T00:49:03.450Z",
+  "summary": {
+    "total_checks": 41,
+    "passed": 41,
+    "warnings": 0,
+    "failed": 0
+  },
+  "policy": {
+    "source_of_truth": ".ai/",
+    "on_failure": "corrigir .ai/state e TASK/HANDOFF; depois rerodar sync do Obsidian",
+    "on_warning": "ajustar docs/indexes e rerodar validacao"
+  },
+  "checks": [
+    {
+      "id": "required:README.md",
+      "status": "pass",
+      "message": "Arquivo encontrado: README.md"
+    },
+    {
+      "id": "required:.mcp.json",
+      "status": "pass",
+      "message": "Arquivo encontrado: .mcp.json"
+    },
+    {
+      "id": "required:.ai/state/current-state.json",
+      "status": "pass",
+      "message": "Arquivo encontrado: .ai/state/current-state.json"
+    },
+    {
+      "id": "required:.ai/state/active-task.json",
+      "status": "pass",
+      "message": "Arquivo encontrado: .ai/state/active-task.json"
+    },
+    {
+      "id": "required:.ai/state/roadmap.json",
+      "status": "pass",
+      "message": "Arquivo encontrado: .ai/state/roadmap.json"
+    },
+    {
+      "id": "required:.ai/indexes/file-index.md",
+      "status": "pass",
+      "message": "Arquivo encontrado: .ai/indexes/file-index.md"
+    },
+    {
+      "id": "required:.ai/indexes/api-index.md",
+      "status": "pass",
+      "message": "Arquivo encontrado: .ai/indexes/api-index.md"
+    },
+    {
+      "id": "json:current-state",
+      "status": "pass",
+      "message": "current-state.json valido"
+    },
+    {
+      "id": "json:active-task",
+      "status": "pass",
+      "message": "active-task.json valido"
+    },
+    {
+      "id": "json:roadmap",
+      "status": "pass",
+      "message": "roadmap.json valido"
+    },
+    {
+      "id": "state:active-task-id",
+      "status": "pass",
+      "message": "active_task_id consistente: TASK-008"
+    },
+    {
+      "id": "state:active-task-id-format",
+      "status": "pass",
+      "message": "Formato do active_task_id valido"
+    },
+    {
+      "id": "docs:readme-active-task",
+      "status": "pass",
+      "message": "README referencia a tarefa ativa"
+    },
+    {
+      "id": "roadmap:current-phase-in-phases",
+      "status": "pass",
+      "message": "current_phase existe em roadmap.phases"
+    },
+    {
+      "id": "roadmap:current-phase-in-details",
+      "status": "pass",
+      "message": "current_phase existe em roadmap.phase_details"
+    },
+    {
+      "id": "roadmap:single-in-progress",
+      "status": "pass",
+      "message": "Roadmap finalizado com todas as fases completed",
+      "details": "context_unpack_and_planning:completed, mcp_connection:completed, memory_write_automation:completed, obsidian_sync:completed, workflow_hardening:completed, agent_adoption:completed, post_completion_usability:completed"
+    },
+    {
+      "id": "roadmap:terminal-phase-alignment",
+      "status": "pass",
+      "message": "current_phase alinhada com fase final em estado terminal",
+      "details": "current_phase=post_completion_usability final=post_completion_usability"
+    },
+    {
+      "id": "naming:tasks",
+      "status": "pass",
+      "message": "Nomenclatura TASK-* valida"
+    },
+    {
+      "id": "naming:handoffs",
+      "status": "pass",
+      "message": "Nomenclatura HANDOFF-* valida"
+    },
+    {
+      "id": "task:active-exists",
+      "status": "pass",
+      "message": "Arquivo da tarefa ativa encontrado",
+      "details": ".ai/tasks/TASK-008.md"
+    },
+    {
+      "id": "task:active-frontmatter-title",
+      "status": "pass",
+      "message": "Frontmatter da tarefa ativa com title consistente",
+      "details": "title=TASK-008"
+    },
+    {
+      "id": "task:active-frontmatter-status",
+      "status": "pass",
+      "message": "Status da tarefa ativa no markdown consistente",
+      "details": "status=completed"
+    },
+    {
+      "id": "task:active-is-latest",
+      "status": "pass",
+      "message": "Tarefa ativa coincide com ultimo TASK-*",
+      "details": "active=TASK-008 latest=TASK-008"
+    },
+    {
+      "id": "state:handoff-in-key-files",
+      "status": "pass",
+      "message": "current-state.key_files referencia handoff",
+      "details": ".ai/handoffs/HANDOFF-008.md"
+    },
+    {
+      "id": "handoff:active-exists",
+      "status": "pass",
+      "message": "Arquivo do handoff ativo encontrado",
+      "details": ".ai/handoffs/HANDOFF-008.md"
+    },
+    {
+      "id": "handoff:state-is-latest",
+      "status": "pass",
+      "message": "Handoff em current-state coincide com ultimo HANDOFF-*",
+      "details": "state=HANDOFF-008 latest=HANDOFF-008"
+    },
+    {
+      "id": "handoff:active-frontmatter-title",
+      "status": "pass",
+      "message": "Frontmatter do handoff ativo com title consistente",
+      "details": "title=HANDOFF-008"
+    },
+    {
+      "id": "handoff:task-number-alignment",
+      "status": "pass",
+      "message": "Numero de TASK e HANDOFF ativos alinhado",
+      "details": "task=TASK-008 handoff=HANDOFF-008"
+    },
+    {
+      "id": "indexes:file-index-active-task",
+      "status": "pass",
+      "message": "file-index referencia a tarefa ativa",
+      "details": "TASK-008"
+    },
+    {
+      "id": "indexes:file-index-active-handoff",
+      "status": "pass",
+      "message": "file-index referencia o handoff ativo",
+      "details": "HANDOFF-008"
+    },
+    {
+      "id": "indexes:file-index-hardening-runner",
+      "status": "pass",
+      "message": "file-index referencia workflow-hardening-runner"
+    },
+    {
+      "id": "indexes:api-index-hardening",
+      "status": "pass",
+      "message": "api-index registra automacao/validacao de hardening"
+    },
+    {
+      "id": "docs:readme-active-handoff",
+      "status": "pass",
+      "message": "README referencia handoff ativo",
+      "details": "HANDOFF-008"
+    },
+    {
+      "id": "mcp:project-memory-present",
+      "status": "pass",
+      "message": ".mcp.json contem project-memory"
+    },
+    {
+      "id": "obsidian:task-mirror-exists",
+      "status": "pass",
+      "message": "Espelho Obsidian da tarefa ativa encontrado",
+      "details": "obsidian-vault/02-tasks/TASK-008.md"
+    },
+    {
+      "id": "obsidian:task-mirror-heading",
+      "status": "pass",
+      "message": "Heading do espelho de task consistente"
+    },
+    {
+      "id": "obsidian:handoff-mirror-exists",
+      "status": "pass",
+      "message": "Espelho Obsidian do handoff ativo encontrado",
+      "details": "obsidian-vault/04-handoffs/HANDOFF-008.md"
+    },
+    {
+      "id": "obsidian:handoff-mirror-heading",
+      "status": "pass",
+      "message": "Heading do espelho de handoff consistente"
+    },
+    {
+      "id": "obsidian:snapshot-exists",
+      "status": "pass",
+      "message": "State snapshot do Obsidian encontrado"
+    },
+    {
+      "id": "obsidian:snapshot-phase",
+      "status": "pass",
+      "message": "State snapshot reflete current_phase"
+    },
+    {
+      "id": "obsidian:snapshot-active-task",
+      "status": "pass",
+      "message": "State snapshot reflete active_task_id"
+    }
+  ]
+}

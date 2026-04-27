@@ -1,0 +1,45 @@
+# File Index
+
+- `.ai/context/project-overview.md`: visão geral do projeto
+- `.ai/context/architecture.md`: arquitetura técnica
+- `.ai/context/cross-agent-memory-handoff.md`: guia para continuar memoria entre Claude, Codex e outros agentes
+- `.ai/context/mcp-project-memory-server.mjs`: servidor MCP local de memória do projeto
+- `.ai/context/integration-map.md`: mapa de integração e comandos de configuração MCP
+- `.ai/context/memory-write-runner.mjs`: runner de automação para escrita de memória por manifesto
+- `.ai/context/memory-write-automation.md`: guia de uso da automação de memória
+- `.ai/context/obsidian-sync-automation.md`: guia de uso da automação de sync no Obsidian
+- `.ai/context/workflow-hardening-runner.mjs`: runner de validacao de consistencia entre estado, indices e espelhos
+- `.ai/context/workflow-hardening.md`: checklist e politica de divergencia para hardening
+- `.ai/context/agent-adoption-runner.mjs`: runner de validacao de adocao cross-agent para Codex, Claude e OpenClaw
+- `.ai/context/agent-adoption.md`: guia da fase 5 para adocao de agentes
+- `.ai/context/project-memory-cli.mjs`: CLI local para carregar, buscar e registrar memorias MCP por projeto
+- `.ai/context/manifests/phase-2-complete.json`: manifesto de transição automática da Fase 2
+- `.ai/context/obsidian-sync-runner.mjs`: runner de sincronização do Obsidian vault
+- `.ai/context/manifests/phase-3-complete.json`: manifesto de transição automática da Fase 3
+- `.ai/context/manifests/phase-4-complete.json`: manifesto de transição automática da Fase 4
+- `.ai/context/manifests/phase-5-applied.json`: manifesto de checkpoint da Fase 5
+- `.ai/context/manifests/phase-5-complete.json`: manifesto de encerramento formal da Fase 5
+- `.ai/state/current-state.json`: fotografia atual do projeto
+- `.ai/state/active-task.json`: estado da tarefa ativa ou final de referência
+- `.ai/state/roadmap.json`: roadmap por fases
+- `.ai/state/workflow-hardening-report.json`: relatorio de integridade gerado pelo hardening runner
+- `.ai/state/agent-adoption-report.json`: relatorio de validacao cross-agent da fase 5
+- `.ai/tasks/TASK-001.md`: registro detalhado da tarefa inicial
+- `.ai/tasks/TASK-002.md`: plano de execução por fases e memória de trabalho
+- `.ai/tasks/TASK-003.md`: implementação e validação da Fase 1 (MCP)
+- `.ai/tasks/TASK-004.md`: execução e encerramento da Fase 2 (automação de memory write)
+- `.ai/tasks/TASK-005.md`: execução e encerramento da Fase 3 (espelhamento no Obsidian)
+- `.ai/tasks/TASK-006.md`: início da Fase 4 (workflow hardening)
+- `.ai/tasks/TASK-007.md`: execução e encerramento da Fase 5 (adocao pelos agentes)
+- `.ai/tasks/TASK-008.md`: atalho de uso para memoria MCP por projeto
+- `.ai/handoffs/HANDOFF-001.md`: continuidade operacional
+- `.ai/handoffs/HANDOFF-002.md`: continuidade após extração e planejamento
+- `.ai/handoffs/HANDOFF-003.md`: continuidade após validação MCP no Codex
+- `.ai/handoffs/HANDOFF-004.md`: continuidade após conclusão da Fase 1 completa
+- `.ai/handoffs/HANDOFF-005.md`: continuidade após conclusão da Fase 2
+- `.ai/handoffs/HANDOFF-006.md`: continuidade após conclusão da Fase 3
+- `.ai/handoffs/HANDOFF-007.md`: handoff final de encerramento do projeto
+- `.ai/handoffs/HANDOFF-008.md`: continuidade apos criacao do atalho ./memory
+- `.mcp.json`: configuração MCP de projeto para Claude Code
+- `README.md`: documentação humana principal do pacote extraído
+- `memory`: wrapper executavel para `.ai/context/project-memory-cli.mjs`

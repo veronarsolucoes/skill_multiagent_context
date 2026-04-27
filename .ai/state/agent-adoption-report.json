@@ -1,0 +1,71 @@
+{
+  "ok": true,
+  "dry_run": false,
+  "generated_at": "2026-04-17T19:45:40.068Z",
+  "summary": {
+    "total_checks": 7,
+    "passed": 7,
+    "failed": 0
+  },
+  "commands": {
+    "codex_mcp_list": {
+      "ok": true,
+      "status": 0,
+      "stdout": "Name            Command  Args                                                                        Env                 Cwd  Status   Auth       \nproject-memory  node     /root/prompt/multi_agent_context/.ai/context/mcp-project-memory-server.mjs  PROJECT_ROOT=*****  -    enabled  Unsupported"
+    },
+    "claude_mcp_list": {
+      "ok": true,
+      "status": 0,
+      "stdout": "Checking MCP server health…\n\nclaude.ai Google Drive: https://drivemcp.googleapis.com/mcp/v1 - ✓ Connected\nclaude.ai Google Calendar: https://gcal.mcp.claude.com/mcp - ✓ Connected\nclaude.ai Gmail: https://gmail.mcp.claude.com/mcp - ✓ Connected\nproject-memory: /usr/bin/node /root/prompt/multi_agent_context/.ai/context/mcp-project-memory-server.mjs - ✓ Connected"
+    },
+    "openclaw_mcp_list": {
+      "ok": true,
+      "status": 0,
+      "stdout": "MCP servers (/home/node/.openclaw/openclaw.json):\n- gcalendar\n- gdocs\n- gdrive\n- gmail\n- gsheets\n- project-memory"
+    }
+  },
+  "checks": [
+    {
+      "id": "state:phase-is-agent-adoption",
+      "status": "pass",
+      "message": "current_phase em agent_adoption",
+      "details": "current_phase=agent_adoption"
+    },
+    {
+      "id": "state:task-is-task-007",
+      "status": "pass",
+      "message": "Tarefa ativa em TASK-007",
+      "details": "current-state=TASK-007 active-task=TASK-007"
+    },
+    {
+      "id": "state:handoff-present",
+      "status": "pass",
+      "message": "Handoff ativo referenciado em key_files",
+      "details": ".ai/handoffs/HANDOFF-007.md"
+    },
+    {
+      "id": "agent:codex-project-memory",
+      "status": "pass",
+      "message": "Codex MCP com project-memory visivel",
+      "details": "codex mcp list"
+    },
+    {
+      "id": "agent:claude-project-memory",
+      "status": "pass",
+      "message": "Claude MCP (escopo projeto) com project-memory conectado",
+      "details": "claude mcp list"
+    },
+    {
+      "id": "agent:openclaw-container-running",
+      "status": "pass",
+      "message": "Container openclaw-gateway encontrado",
+      "details": "docker ps --format {{.Names}}"
+    },
+    {
+      "id": "agent:openclaw-project-memory",
+      "status": "pass",
+      "message": "OpenClaw MCP com project-memory visivel",
+      "details": "docker exec openclaw-gateway openclaw mcp list"
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "update_current_state": {
+    "current_phase": "agent_adoption",
+    "current_goal": "Aplicar prompts nos agentes e validar continuidade com uma tarefa real pequena entre ambientes",
+    "active_task_id": "TASK-007",
+    "last_completed_task_id": "TASK-006",
+    "next_recommended_step": "Executar um ciclo curto de continuidade entre agentes usando HANDOFF-007 como ponto de entrada",
+    "recommended_agent": "Codex",
+    "key_files": [
+      "README.md",
+      ".ai/context/workflow-hardening-runner.mjs",
+      ".ai/context/workflow-hardening.md",
+      ".ai/context/manifests/phase-4-complete.json",
+      ".ai/state/workflow-hardening-report.json",
+      ".ai/state/current-state.json",
+      ".ai/state/active-task.json",
+      ".ai/tasks/TASK-007.md",
+      ".ai/handoffs/HANDOFF-007.md"
+    ],
+    "known_blockers": [],
+    "last_updated_by": "Codex",
+    "last_updated_at": "2026-04-17T16:14:53-03:00"
+  },
+  "append_current_state_arrays": {
+    "recent_decisions": [
+      "Adicionar workflow-hardening-runner como validacao obrigatoria antes de encerrar fase",
+      "Persistir relatorio de integridade em .ai/state/workflow-hardening-report.json"
+    ]
+  },
+  "update_active_task": {
+    "task_id": "TASK-007",
+    "title": "Fase 5 - Adocao pelos agentes",
+    "status": "in_progress",
+    "owner_agent": "Codex",
+    "summary": "Executar uma tarefa real pequena com passagem de contexto entre agentes usando MCP, TASK e HANDOFF.",
+    "inputs": [
+      ".ai/tasks/TASK-006.md",
+      ".ai/handoffs/HANDOFF-006.md",
+      ".ai/state/current-state.json",
+      ".ai/state/active-task.json",
+      ".ai/state/roadmap.json",
+      ".ai/state/workflow-hardening-report.json"
+    ],
+    "outputs": [
+      "TASK-007.md",
+      "HANDOFF-007.md",
+      "Registro de teste cross-agent em logs e timeline",
+      "Atualizacao de docs para adocao de agentes"
+    ],
+    "files_involved": [
+      "README.md",
+      ".ai/state/current-state.json",
+      ".ai/state/active-task.json",
+      ".ai/state/roadmap.json",
+      ".ai/tasks/TASK-007.md",
+      ".ai/handoffs/HANDOFF-007.md",
+      ".ai/logs/codex.md",
+      ".ai/logs/timeline.md"
+    ],
+    "next_step": "Executar um teste pequeno de continuidade entre agentes e registrar evidencias no handoff",
+    "handoff_ready": true
+  },
+  "roadmap_phase_status": {
+    "phase-4": "completed",
+    "phase-5": "in_progress"
+  },
+  "status_updates": [
+    {
+      "path": ".ai/tasks/TASK-006.md",
+      "frontmatter": {
+        "status": "completed",
+        "last_updated": "2026-04-17"
+      },
+      "append_sections": [
+        {
+          "title": "Encerramento da tarefa",
+          "bullets": [
+            "resultado: concluida",
+            "workflow-hardening-runner implementado e validado com zero falhas",
+            "politica de divergencia registrada em `.ai/context/workflow-hardening.md`",
+            "relatorio salvo em `.ai/state/workflow-hardening-report.json`",
+            "continuidade aberta em `.ai/tasks/TASK-007.md`"
+          ]
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "path": ".ai/tasks/TASK-007.md",
+      "frontmatter": {
+        "title": "TASK-007",
+        "purpose": "Fase 5 - Adocao pelos agentes.",
+        "status": "active",
+        "owner": "Codex",
+        "last_updated": "2026-04-17",
+        "related_files": [
+          ".ai/state/current-state.json",
+          ".ai/state/active-task.json",
+          ".ai/state/roadmap.json",
+          ".ai/handoffs/HANDOFF-007.md"
+        ],
+        "tags": [
+          "task",
+          "adoption",
+          "cross-agent",
+          "continuity"
+        ]
+      },
+      "heading": "TASK-007 - Fase 5 - Adocao pelos agentes",
+      "sections": [
+        {
+          "title": "Contexto",
+          "bullets": [
+            "fase atual: `agent_adoption`",
+            "origem: continuidade apos conclusao da Fase 4 (workflow_hardening)",
+            "objetivo: validar passagem de contexto entre agentes em tarefa pequena real"
+          ]
+        },
+        {
+          "title": "Objetivo tecnico",
+          "text": "Executar um ciclo de continuidade entre agentes com leitura de estado, aplicacao incremental e novo handoff, sem depender da conversa original."
+        },
+        {
+          "title": "Proximo passo recomendado",
+          "bullets": [
+            "escolher uma tarefa pequena orientada por arquivo",
+            "executar a tarefa com base em `.ai/state/*` e handoff mais recente",
+            "registrar o resultado em `TASK-007`, `HANDOFF-007`, logs e timeline",
+            "validar se outro agente consegue continuar apenas pelos artefatos"
+          ]
+        },
+        {
+          "title": "Handoff",
+          "bullets": [
+            "proximo agente sugerido: Codex",
+            "arquivos prioritarios: `.ai/state/current-state.json`, `.ai/state/active-task.json`, `.ai/handoffs/HANDOFF-007.md`, `README.md`"
+          ]
+        }
+      ]
+    },
+    {
+      "path": ".ai/handoffs/HANDOFF-007.md",
+      "frontmatter": {
+        "title": "HANDOFF-007",
+        "purpose": "Continuidade apos conclusao da Fase 4 e inicio da Fase 5.",
+        "status": "active",
+        "owner": "Codex",
+        "last_updated": "2026-04-17",
+        "related_files": [
+          ".ai/state/current-state.json",
+          ".ai/state/active-task.json",
+          ".ai/state/roadmap.json",
+          ".ai/tasks/TASK-007.md",
+          "README.md"
+        ],
+        "tags": [
+          "handoff",
+          "continuity",
+          "adoption"
+        ]
+      },
+      "heading": "HANDOFF-007",
+      "sections": [
+        {
+          "title": "Estado atual",
+          "bullets": [
+            "Fase 4 concluida com validacao automatizada de integridade",
+            "Fase 5 iniciada para testar continuidade entre agentes"
+          ]
+        },
+        {
+          "title": "O que acabou de ser feito",
+          "bullets": [
+            "implementado `.ai/context/workflow-hardening-runner.mjs`",
+            "documentada politica em `.ai/context/workflow-hardening.md`",
+            "gerado relatorio em `.ai/state/workflow-hardening-report.json`",
+            "aplicada transicao automatica via manifesto `phase-4-complete`"
+          ]
+        },
+        {
+          "title": "O que falta fazer",
+          "bullets": [
+            "executar tarefa pequena real com passagem de contexto entre agentes",
+            "validar leitura por outro agente sem depender da conversa",
+            "registrar resultados e criterios de aprovacao da adocao"
+          ]
+        },
+        {
+          "title": "Proxima acao recomendada",
+          "text": "Iniciar TASK-007 com uma alteracao incremental pequena e finalizar com novo handoff testando continuidade."
+        },
+        {
+          "title": "Arquivos prioritarios para leitura",
+          "bullets": [
+            "`.ai/tasks/TASK-007.md`",
+            "`.ai/state/current-state.json`",
+            "`.ai/state/active-task.json`",
+            "`.ai/state/roadmap.json`",
+            "`.ai/state/workflow-hardening-report.json`",
+            "`README.md`"
+          ]
+        },
+        {
+          "title": "Proximo agente sugerido",
+          "text": "Codex"
+        }
+      ]
+    }
+  ],
+  "append_logs": {
+    "codex": [
+      "2026-04-17: implementado `.ai/context/workflow-hardening-runner.mjs` para validar consistencia de estado, indices e espelhos.",
+      "2026-04-17: Fase 4 concluida e Fase 5 iniciada com TASK-007/HANDOFF-007."
+    ],
+    "timeline": [
+      "2026-04-17: Fase 4 concluida com checklist automatizado de hardening e relatorio de integridade.",
+      "2026-04-17: Fase 5 iniciada (agent_adoption) com TASK-007/HANDOFF-007."
+    ]
+  },
+  "append_memory": {
+    "decisions": [
+      "2026-04-17: tornar workflow-hardening-runner obrigatorio antes de fechamento de fase.",
+      "2026-04-17: persistir relatorio de integridade em .ai/state/workflow-hardening-report.json."
+    ],
+    "patterns": [
+      "Executar workflow-hardening-runner, depois obsidian-sync-runner e so entao fechar a fase."
+    ],
+    "blockers": [
+      "2026-04-17: sem bloqueios ativos apos conclusao da Fase 4."
+    ]
+  }
+}

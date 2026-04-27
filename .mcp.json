@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "project-memory": {
+      "type": "stdio",
+      "command": "/usr/bin/node",
+      "args": [
+        "/root/prompt/multi_agent_context/.ai/context/mcp-project-memory-server.mjs"
+      ],
+      "env": {}
+    }
+  }
+}

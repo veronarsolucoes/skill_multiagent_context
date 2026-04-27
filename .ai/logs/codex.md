@@ -1,0 +1,27 @@
+# Codex Log
+
+- 2026-04-14: log inicial criado.
+- 2026-04-17: localizado e extraído `/root/prompt/multi_agent_context_starter.zip`.
+- 2026-04-17: lidos prompts de Claude Code, Codex e Antigravity.
+- 2026-04-17: criada a `TASK-002` com plano de execução por fases e `HANDOFF-002`.
+- 2026-04-17: atualizados estado, roadmap, memória, documentação e espelho Obsidian inicial.
+- 2026-04-17: criado servidor MCP local `.ai/context/mcp-project-memory-server.mjs`.
+- 2026-04-17: registrado MCP `project-memory` com `codex mcp add`.
+- 2026-04-17: smoke test MCP executado com sucesso (initialize/tools/list/tools/call).
+- 2026-04-17: criada `TASK-003` e `HANDOFF-003` para continuidade da Fase 1.
+- 2026-04-17: configurado `project-memory` no Claude Code via `.mcp.json`.
+- 2026-04-17: ajustado servidor para compatibilidade framed + json por linha.
+- 2026-04-17: `claude mcp list` passou com `project-memory` conectado.
+- 2026-04-17: pacote espelhado para OpenClaw runtime e `project-memory` registrado com `openclaw mcp set`.
+- 2026-04-17: criada `TASK-004` e `HANDOFF-004` para iniciar Fase 2.
+- 2026-04-17: implementado runner de memory write em `.ai/context/memory-write-runner.mjs`.
+- 2026-04-17: manifesto `phase-2-complete` executado para transicao automatica TASK-004 -> TASK-005.
+- 2026-04-17: implementado runner de sync Obsidian em `.ai/context/obsidian-sync-runner.mjs`.
+- 2026-04-17: manifesto `phase-3-complete` executado para transicao automatica TASK-005 -> TASK-006.
+- 2026-04-17: implementado `.ai/context/workflow-hardening-runner.mjs` para validar consistencia de estado, indices e espelhos.
+- 2026-04-17: Fase 4 concluida e Fase 5 iniciada com TASK-007/HANDOFF-007.
+- 2026-04-17: implementado `.ai/context/agent-adoption-runner.mjs` e validada adocao cross-agent.
+- 2026-04-17: gerado `.ai/state/agent-adoption-report.json` com 7/7 checks aprovados.
+- 2026-04-17: fase 5 encerrada formalmente; projeto marcado como concluido.
+- 2026-04-17: workflow-hardening-runner ajustado para validar estado terminal (todas as fases completed).
+- 2026-04-17: criado wrapper `./memory` e CLI `.ai/context/project-memory-cli.mjs` para simplificar load/use/add/search de memorias MCP por projeto.

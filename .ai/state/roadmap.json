@@ -1,0 +1,55 @@
+{
+  "phases": [
+    "context_unpack_and_planning",
+    "mcp_connection",
+    "memory_write_automation",
+    "obsidian_sync",
+    "workflow_hardening",
+    "agent_adoption",
+    "post_completion_usability"
+  ],
+  "phase_details": [
+    {
+      "id": "phase-0",
+      "name": "context_unpack_and_planning",
+      "status": "completed",
+      "goal": "Extrair o pacote, ler prompts, criar plano por fases e registrar memória inicial."
+    },
+    {
+      "id": "phase-1",
+      "name": "mcp_connection",
+      "status": "completed",
+      "goal": "Configurar e validar MCP para leitura e escrita de estado, tarefa ativa, decisões e handoffs."
+    },
+    {
+      "id": "phase-2",
+      "name": "memory_write_automation",
+      "status": "completed",
+      "goal": "Padronizar ou automatizar atualização de current-state, active-task, TASK, HANDOFF, logs e timeline."
+    },
+    {
+      "id": "phase-3",
+      "name": "obsidian_sync",
+      "status": "completed",
+      "goal": "Manter o vault Obsidian como espelho legível dos registros operacionais principais."
+    },
+    {
+      "id": "phase-4",
+      "name": "workflow_hardening",
+      "status": "completed",
+      "goal": "Adicionar validações de nomenclatura, índices, consistência de estado e tratamento de divergências."
+    },
+    {
+      "id": "phase-5",
+      "name": "agent_adoption",
+      "status": "completed",
+      "goal": "Aplicar os prompts nos agentes e testar continuidade com uma tarefa real pequena."
+    },
+    {
+      "id": "phase-6",
+      "name": "post_completion_usability",
+      "status": "completed",
+      "goal": "Adicionar atalho simples para carregar e registrar memorias MCP por projeto."
+    }
+  ]
+}

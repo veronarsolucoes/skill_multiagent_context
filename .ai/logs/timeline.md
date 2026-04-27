@@ -1,0 +1,21 @@
+# Timeline
+
+- 2026-04-14: bootstrap da estrutura de memória compartilhada concluído.
+- 2026-04-17: Fase 0 concluída por Codex: extração, leitura dos prompts, plano por fases e registro de memória.
+- 2026-04-17: próximo passo definido como Fase 1: conexão e validação do MCP.
+- 2026-04-17: servidor MCP local implementado e validado no Codex (Fase 1 em andamento).
+- 2026-04-17: servidor `project-memory` registrado em `codex mcp`.
+- 2026-04-17: servidor `project-memory` conectado no Claude Code.
+- 2026-04-17: servidor `project-memory` configurado no OpenClaw/Antigravity runtime.
+- 2026-04-17: Fase 1 marcada como concluída e Fase 2 iniciada.
+- 2026-04-17: Fase 2 concluida com automacao de memory write (runner + manifesto).
+- 2026-04-17: Fase 3 iniciada (obsidian_sync) com TASK-005/HANDOFF-005.
+- 2026-04-17: Fase 3 concluida com sync automatizado do Obsidian.
+- 2026-04-17: Fase 4 iniciada (workflow_hardening) com TASK-006/HANDOFF-006.
+- 2026-04-17: Fase 4 concluida com checklist automatizado de hardening e relatorio de integridade.
+- 2026-04-17: Fase 5 iniciada (agent_adoption) com TASK-007/HANDOFF-007.
+- 2026-04-17: Fase 5 aplicada com validacao de MCP em Codex, Claude e OpenClaw.
+- 2026-04-17: checkpoint da Fase 5 registrado em TASK-007/HANDOFF-007.
+- 2026-04-17: Fase 5 encerrada formalmente e roadmap finalizado.
+- 2026-04-17: Projeto marcado como concluido.
+- 2026-04-17: evolucao pos-conclusao aplicada com wrapper `./memory` para simplificar acesso a memorias MCP por projeto.

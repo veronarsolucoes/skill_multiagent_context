@@ -1,0 +1,37 @@
+{
+  "task_id": "TASK-008",
+  "title": "Atalho de uso para memoria MCP",
+  "status": "completed",
+  "owner_agent": "Codex",
+  "summary": "Criado wrapper ./memory para facilitar leitura, busca e registro de memorias MCP por projeto.",
+  "inputs": [
+    ".ai/state/current-state.json",
+    ".ai/state/active-task.json",
+    "README.md",
+    ".ai/state/roadmap.json",
+    "install.sh",
+    ".claude/commands/load-project.md",
+    ".claude/commands/load-memory.md",
+    ".ai/context/mcp-project-memory-server.mjs"
+  ],
+  "outputs": [
+    "Comando ./memory criado",
+    "CLI .ai/context/project-memory-cli.mjs criada",
+    "README atualizado com fluxo simples para Codex",
+    "Smoke tests locais executados para load/list/search/state e dry-run de use/add"
+  ],
+  "files_involved": [
+    "README.md",
+    "memory",
+    ".ai/context/project-memory-cli.mjs",
+    ".ai/state/current-state.json",
+    ".ai/state/active-task.json",
+    ".ai/state/roadmap.json",
+    ".ai/tasks/TASK-008.md",
+    ".ai/handoffs/HANDOFF-008.md",
+    ".ai/logs/codex.md",
+    ".ai/logs/timeline.md"
+  ],
+  "next_step": "Para usar em outro projeto: ./memory load <projeto>; ./memory use <projeto>; reiniciar Codex; chamar mcp__project_memory__.get_project_state.",
+  "handoff_ready": true
+}
