@@ -105,3 +105,12 @@ Summary: Runner ajustado para ignorar log operacional no snapshot GitHub
 - Adicionado suporte a `--exclude <path>` no runner.
 - Validação executada: `node --check` passou e dry-run passou listando apenas o runner como mudança incluída.
 - Push real ainda pendente de confirmação explícita do usuário.
+## MCP update 2026-04-30T03:13:20.264Z
+Summary: Push real bloqueado por autenticação GitHub ausente
+## Atualização 2026-04-30 03:13 UTC
+
+- Usuário autorizou push real.
+- Tentativa de push do submodule `multi_agent_context` para `https://github.com/veronarsolucoes/skill_multiagent_context.git` falhou antes de qualquer escrita remota.
+- Erro: `fatal: could not read Username for 'https://github.com': No such device or address`.
+- Diagnóstico: sem `credential.helper`, sem `gh`, sem `GH_TOKEN/GITHUB_TOKEN` e sem chave SSH pública em `/home/node/.ssh` para autenticar no GitHub.
+- Estado local preservado: commit `4436fad chore: exclude github push operational log` existe localmente; repo raiz ainda precisa atualizar ponteiro do submodule após push remoto.
