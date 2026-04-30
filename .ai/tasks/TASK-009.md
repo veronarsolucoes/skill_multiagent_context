@@ -97,3 +97,11 @@ node .ai/context/github-memory-push-runner.mjs --project-root /root/prompt/<proj
 ## Encerramento da tarefa
 
 - resultado: em andamento
+## MCP update 2026-04-30T03:09:01.239Z
+Summary: Runner ajustado para ignorar log operacional no snapshot GitHub
+## Atualização 2026-04-30 03:09 UTC
+
+- Ajustado `.ai/context/github-memory-push-runner.mjs` para excluir `.ai/logs/github-push.log` por padrão usando pathspec `:(exclude)`.
+- Adicionado suporte a `--exclude <path>` no runner.
+- Validação executada: `node --check` passou e dry-run passou listando apenas o runner como mudança incluída.
+- Push real ainda pendente de confirmação explícita do usuário.

@@ -10,6 +10,7 @@ import { spawnSync } from "node:child_process";
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const DEFAULT_PROJECT_ROOT = path.resolve(SCRIPT_DIR, "../..");
 const DEFAULT_INCLUDES = [".ai", "obsidian-vault", "README.md", "memory"];
+const DEFAULT_EXCLUDES = [".ai/logs/github-push.log"];
 
 function printHelp() {
   console.log(
@@ -22,6 +23,7 @@ function printHelp() {
       "  --remote <name>        Git remote (default: origin)",
       "  --branch <name>        Target branch (default: current branch)",
       "  --include <path>       Path to stage; can be repeated",
+      "  --exclude <path>       Path to exclude from staging; can be repeated",
       "  --message <text>       Commit message",
       "  --skip-hardening       Do not run workflow-hardening-runner when available",
       "  --dry-run              Print actions only (default)",
@@ -29,6 +31,7 @@ function printHelp() {
       "",
       "Safety:",
       "  - dry-run is the default; use --push for real execution.",
+      "  - operational push logs are excluded by default.",
       "  - the runner never pulls, resets, rebases or resolves remote divergence.",
       "  - if git push fails, fix the repository manually and rerun."
     ].join("\n")
@@ -46,6 +49,7 @@ function parseArgs(argv) {
     remote: "origin",
     branch: "",
     includes: [],
+    excludes: [],
     message: "",
     skipHardening: false,
     dryRun: true
@@ -77,6 +81,11 @@ function parseArgs(argv) {
       i += 1;
       continue;
     }
+    if (arg === "--exclude") {
+      out.excludes.push(argv[i + 1] || "");
+      i += 1;
+      continue;
+    }
     if (arg === "--message") {
       out.message = argv[i + 1] || "";
       i += 1;
@@ -98,6 +107,7 @@ function parseArgs(argv) {
   }
 
   out.includes = out.includes.filter(Boolean);
+  out.excludes = out.excludes.filter(Boolean);
   return out;
 }
 
@@ -134,6 +144,14 @@ function shellQuote(value) {
 
 function printCommand(command, args) {
   console.log(`  ${command} ${args.map(shellQuote).join(" ")}`);
+}
+
+function excludePathspec(relativePath) {
+  return `:(exclude)${relativePath}`;
+}
+
+function buildPathspecs(includes, excludes) {
+  return [...includes, ...excludes.map(excludePathspec)];
 }
 
 function ensureInsideProject(projectRoot, relativePath) {
@@ -214,6 +232,8 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   const projectRoot = path.resolve(args.projectRoot);
   const includes = args.includes.length > 0 ? args.includes : DEFAULT_INCLUDES;
+  const excludes = args.excludes.length > 0 ? args.excludes : DEFAULT_EXCLUDES;
+  const pathspecs = buildPathspecs(includes, excludes);
   const { state, activeTask } = await validateProject(projectRoot);
   const branch = args.branch || currentBranch(projectRoot);
   const message = args.message || defaultMessage(state, activeTask);
@@ -224,9 +244,9 @@ async function main() {
     fail(`workflow hardening failed\n${hardening.stderr || hardening.stdout}`);
   }
 
-  const status = git(projectRoot, ["status", "--porcelain"]).stdout;
+  const status = git(projectRoot, ["status", "--porcelain", "--", ...pathspecs]).stdout;
   if (!status) {
-    console.log("No changes to push.");
+    console.log("No included changes to push.");
     return;
   }
 
@@ -241,7 +261,7 @@ async function main() {
   if (args.dryRun) {
     console.log("");
     console.log("Commands that would run:");
-    printCommand("git", ["-C", projectRoot, "add", "--", ...includes]);
+    printCommand("git", ["-C", projectRoot, "add", "--", ...pathspecs]);
     printCommand("git", ["-C", projectRoot, "commit", "-m", message]);
     printCommand("git", ["-C", projectRoot, "push", args.remote, `HEAD:${branch}`]);
     return;
@@ -252,7 +272,10 @@ async function main() {
     for (const includePath of includes) {
       ensureInsideProject(projectRoot, includePath);
     }
-    git(projectRoot, ["add", "--", ...includes]);
+    for (const excludePath of excludes) {
+      ensureInsideProject(projectRoot, excludePath);
+    }
+    git(projectRoot, ["add", "--", ...pathspecs]);
     const staged = git(projectRoot, ["diff", "--cached", "--quiet"], { allowFailure: true });
     if (staged.status === 0) {
       console.log("No staged changes after applying include filters.");
