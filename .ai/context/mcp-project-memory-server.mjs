@@ -7,6 +7,9 @@ import path from "node:path";
 const PROJECT_ROOT = path.resolve(
   process.env.PROJECT_ROOT || path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..")
 );
+// When PROJECT_ROOT is the canonical root (e.g. /root/prompt), tools accept an
+// optional "project" argument to select a subdirectory. When PROJECT_ROOT is
+// already a single project dir, "project" is ignored and stays backwards-compatible.
 const DEBUG_LOG = process.env.MCP_DEBUG_LOG || "";
 const TOOL_PREFIX = process.env.TOOL_PREFIX || "";
 const MEMORY_READ_ONLY = /^(1|true|yes)$/i.test(process.env.MEMORY_READ_ONLY || "");
@@ -25,13 +28,20 @@ function debugLog(message) {
   }
 }
 
+const PROJECT_PROP = {
+  project: {
+    type: "string",
+    description: "Subdirectory name inside PROJECT_ROOT (e.g. 'multi_agent_context'). Required when PROJECT_ROOT is the canonical root; omit when PROJECT_ROOT is already a single project dir."
+  }
+};
+
 const TOOL_DEFS = [
   {
     name: "get_project_state",
     description: "Return .ai/state/current-state.json",
     inputSchema: {
       type: "object",
-      properties: {}
+      properties: { ...PROJECT_PROP }
     }
   },
   {
@@ -39,7 +49,7 @@ const TOOL_DEFS = [
     description: "Return .ai/state/active-task.json",
     inputSchema: {
       type: "object",
-      properties: {}
+      properties: { ...PROJECT_PROP }
     }
   },
   {
@@ -48,6 +58,7 @@ const TOOL_DEFS = [
     inputSchema: {
       type: "object",
       properties: {
+        ...PROJECT_PROP,
         limit: { type: "integer", minimum: 1, maximum: 50 }
       },
       additionalProperties: false
@@ -59,6 +70,7 @@ const TOOL_DEFS = [
     inputSchema: {
       type: "object",
       properties: {
+        ...PROJECT_PROP,
         task_id: { type: "string" },
         owner_agent: { type: "string" },
         summary: { type: "string" },
@@ -74,6 +86,7 @@ const TOOL_DEFS = [
     inputSchema: {
       type: "object",
       properties: {
+        ...PROJECT_PROP,
         handoff_id: { type: "string" },
         owner: { type: "string" },
         status: { type: "string" },
@@ -94,11 +107,20 @@ const TOOL_DEFS = [
     inputSchema: {
       type: "object",
       properties: {
+        ...PROJECT_PROP,
         query: { type: "string" },
         max_results: { type: "integer", minimum: 1, maximum: 200 }
       },
       required: ["query"],
       additionalProperties: false
+    }
+  },
+  {
+    name: "list_projects",
+    description: "List available project subdirectories under PROJECT_ROOT that contain a .ai/ directory.",
+    inputSchema: {
+      type: "object",
+      properties: {}
     }
   }
 ];
@@ -321,50 +343,78 @@ async function handleMessage(msg) {
   }
 }
 
-function resolveInsideProject(relativePath) {
-  const resolved = path.resolve(PROJECT_ROOT, relativePath);
-  if (!resolved.startsWith(PROJECT_ROOT)) {
+function effectiveRoot(project) {
+  if (!project) {
+    return PROJECT_ROOT;
+  }
+  const name = path.basename(project); // strip any path traversal
+  const resolved = path.resolve(PROJECT_ROOT, name);
+  if (!resolved.startsWith(PROJECT_ROOT + path.sep) && resolved !== PROJECT_ROOT) {
+    throw new Error(`Project name escapes root: ${project}`);
+  }
+  return resolved;
+}
+
+function resolveInsideProject(relativePath, project) {
+  const root = effectiveRoot(project);
+  const resolved = path.resolve(root, relativePath);
+  if (!resolved.startsWith(root)) {
     throw new Error("Path escapes project root.");
   }
   return resolved;
 }
 
-async function readJson(relativePath) {
-  const full = resolveInsideProject(relativePath);
+async function readJson(relativePath, project) {
+  const full = resolveInsideProject(relativePath, project);
   const raw = await fsp.readFile(full, "utf8");
   return JSON.parse(raw);
 }
 
-async function appendText(relativePath, text) {
-  const full = resolveInsideProject(relativePath);
+async function appendText(relativePath, text, project) {
+  const full = resolveInsideProject(relativePath, project);
   await fsp.mkdir(path.dirname(full), { recursive: true });
   await fsp.appendFile(full, text, "utf8");
 }
 
-async function writeText(relativePath, text) {
-  const full = resolveInsideProject(relativePath);
+async function writeText(relativePath, text, project) {
+  const full = resolveInsideProject(relativePath, project);
   await fsp.mkdir(path.dirname(full), { recursive: true });
   await fsp.writeFile(full, text, "utf8");
 }
 
 async function runTool(name, args) {
+  const project = typeof args.project === "string" && args.project.trim() ? args.project.trim() : null;
+
   if (MEMORY_READ_ONLY && (name === "save_task_log" || name === "save_handoff")) {
     throw new Error("This project-memory MCP is read-only. Point the client to the canonical memory root to write.");
   }
 
+  if (name === "list_projects") {
+    const entries = await fsp.readdir(PROJECT_ROOT, { withFileTypes: true });
+    const projects = [];
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue;
+      const aiDir = path.join(PROJECT_ROOT, entry.name, ".ai");
+      if (fs.existsSync(aiDir)) {
+        projects.push(entry.name);
+      }
+    }
+    return { ok: true, canonical_root: PROJECT_ROOT, projects };
+  }
+
   if (name === "get_project_state") {
-    const state = await readJson(".ai/state/current-state.json");
-    return { ok: true, state };
+    const state = await readJson(".ai/state/current-state.json", project);
+    return { ok: true, project: project || path.basename(PROJECT_ROOT), state };
   }
 
   if (name === "get_active_task") {
-    const task = await readJson(".ai/state/active-task.json");
-    return { ok: true, task };
+    const task = await readJson(".ai/state/active-task.json", project);
+    return { ok: true, project: project || path.basename(PROJECT_ROOT), task };
   }
 
   if (name === "get_recent_decisions") {
     const limit = Number.isInteger(args.limit) ? args.limit : 10;
-    const fullPath = resolveInsideProject(".ai/memory/decisions.md");
+    const fullPath = resolveInsideProject(".ai/memory/decisions.md", project);
     const raw = await fsp.readFile(fullPath, "utf8");
     const lines = raw
       .split("\n")
@@ -379,17 +429,13 @@ async function runTool(name, args) {
     const owner = String(args.owner_agent || "Codex").trim();
     const summary = String(args.summary || "").trim();
     const content = String(args.content || "").trim();
-    if (!taskId) {
-      throw new Error("task_id is required.");
-    }
-    if (!content) {
-      throw new Error("content is required.");
-    }
+    if (!taskId) throw new Error("task_id is required.");
+    if (!content) throw new Error("content is required.");
 
     const now = new Date().toISOString();
     const filename = taskId.endsWith(".md") ? taskId : `${taskId}.md`;
     const rel = `.ai/tasks/${filename}`;
-    const full = resolveInsideProject(rel);
+    const full = resolveInsideProject(rel, project);
     const exists = fs.existsSync(full);
 
     if (!exists) {
@@ -408,7 +454,7 @@ async function runTool(name, args) {
         `# ${taskId.replace(/\.md$/, "")}`,
         ""
       ].join("\n");
-      await writeText(rel, initial);
+      await writeText(rel, initial, project);
     }
 
     const section = [
@@ -420,7 +466,7 @@ async function runTool(name, args) {
       .filter(Boolean)
       .join("\n");
 
-    await appendText(rel, section + "\n");
+    await appendText(rel, section + "\n", project);
     return { ok: true, file: rel, created: !exists, updated_at: now };
   }
 
@@ -431,12 +477,8 @@ async function runTool(name, args) {
     const purpose = String(args.purpose || "Handoff criado via MCP save_handoff").trim();
     const content = String(args.content || "").trim();
     const related = Array.isArray(args.related_files) ? args.related_files : [];
-    if (!handoffId) {
-      throw new Error("handoff_id is required.");
-    }
-    if (!content) {
-      throw new Error("content is required.");
-    }
+    if (!handoffId) throw new Error("handoff_id is required.");
+    if (!content) throw new Error("content is required.");
 
     const now = new Date().toISOString();
     const filename = handoffId.endsWith(".md") ? handoffId : `${handoffId}.md`;
@@ -470,53 +512,40 @@ async function runTool(name, args) {
     frontMatter.push(content);
     frontMatter.push("");
 
-    await writeText(rel, frontMatter.join("\n"));
+    await writeText(rel, frontMatter.join("\n"), project);
     return { ok: true, file: rel, updated_at: now };
   }
 
   if (name === "search_context") {
     const query = String(args.query || "").trim();
-    if (!query) {
-      throw new Error("query is required.");
-    }
+    if (!query) throw new Error("query is required.");
     const maxResults = Number.isInteger(args.max_results) ? args.max_results : 20;
     const searchRoots = [
-      ".ai/context",
-      ".ai/state",
-      ".ai/tasks",
-      ".ai/handoffs",
-      ".ai/memory",
-      ".ai/logs"
+      ".ai/context", ".ai/state", ".ai/tasks",
+      ".ai/handoffs", ".ai/memory", ".ai/logs"
     ];
-
+    const root = effectiveRoot(project);
     const matches = [];
     for (const relRoot of searchRoots) {
-      const root = resolveInsideProject(relRoot);
-      if (!fs.existsSync(root)) {
-        continue;
-      }
-      const files = await listFiles(root);
+      const dir = resolveInsideProject(relRoot, project);
+      if (!fs.existsSync(dir)) continue;
+      const files = await listFiles(dir);
       for (const fullFile of files) {
-        if (matches.length >= maxResults) {
-          break;
-        }
+        if (matches.length >= maxResults) break;
         const content = await fsp.readFile(fullFile, "utf8");
         const lines = content.split("\n");
         for (let i = 0; i < lines.length; i += 1) {
           if (lines[i].toLowerCase().includes(query.toLowerCase())) {
             matches.push({
-              file: path.relative(PROJECT_ROOT, fullFile),
+              file: path.relative(root, fullFile),
               line: i + 1,
               preview: lines[i].trim()
             });
-            if (matches.length >= maxResults) {
-              break;
-            }
+            if (matches.length >= maxResults) break;
           }
         }
       }
     }
-
     return { ok: true, query, matches };
   }
 
