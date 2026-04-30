@@ -1,18 +1,18 @@
 # State Snapshot
 
-Gerado em: 2026-04-18T00:48:17.505Z
+Gerado em: 2026-04-30T01:31:22.016Z
 
 ## Current State
 - phase: post_completion_usability
-- goal: Melhoria pos-conclusao aplicada: atalho ./memory para carregar e registrar memorias MCP por projeto
-- active_task_id: TASK-008
+- goal: Push geral dos projetos e correção do bug de sincronia com OpenClaw, com agendamento e validação de continuidade.
+- active_task_id: TASK-009
 - last_completed_task_id: TASK-008
 
 ## Active Task
-- task_id: TASK-008
-- title: Atalho de uso para memoria MCP
-- status: completed
-- next_step: Para usar em outro projeto: ./memory load <projeto>; ./memory use <projeto>; reiniciar Codex; chamar mcp__project_memory__.get_project_state.
+- task_id: TASK-009
+- title: Push geral dos projetos e correção de sincronia com OpenClaw
+- status: active
+- next_step: Inventariar projetos, confirmar remotes Git, descobrir como o openclaw-gateway e iniciado e rodar dry-run do push antes de habilitar agendamento.
 
 ## Roadmap
 - phase-0 | context_unpack_and_planning | completed

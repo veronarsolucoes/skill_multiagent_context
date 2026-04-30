@@ -1,10 +1,10 @@
 {
   "project_name": "multi-agent-context-system",
   "current_phase": "post_completion_usability",
-  "current_goal": "Melhoria pos-conclusao aplicada: atalho ./memory para carregar e registrar memorias MCP por projeto",
-  "active_task_id": "TASK-008",
+  "current_goal": "Push geral dos projetos e correção do bug de sincronia com OpenClaw, com agendamento e validação de continuidade.",
+  "active_task_id": "TASK-009",
   "last_completed_task_id": "TASK-008",
-  "next_recommended_step": "Usar ./memory load <projeto> para ler memoria local e ./memory use <projeto> para apontar project-memory no Codex; reiniciar o Codex antes de chamar mcp__project_memory__.",
+  "next_recommended_step": "Mapear o estado dos projetos afetados, reproduzir a falha de sincronia com OpenClaw e definir a ordem do push/agendamento antes de executar mudanças.",
   "recommended_agent": "Codex",
   "key_files": [
     "README.md",
@@ -13,8 +13,11 @@
     ".ai/state/roadmap.json",
     ".ai/state/workflow-hardening-report.json",
     ".ai/state/agent-adoption-report.json",
-      ".ai/tasks/TASK-008.md",
-      ".ai/handoffs/HANDOFF-008.md",
+      ".ai/tasks/TASK-009.md",
+      ".ai/handoffs/HANDOFF-009.md",
+      ".ai/context/github-openclaw-memory-architecture.md",
+      ".ai/context/github-memory-push-runner.mjs",
+      ".ai/context/mcp-project-memory-server.mjs",
       ".ai/context/project-memory-cli.mjs",
       "memory"
   ],
@@ -32,14 +35,17 @@
     "Encerrar fase com transicao automatica via manifest e validacao final",
     "Adicionar workflow-hardening-runner como validacao obrigatoria antes de encerrar fase",
     "Persistir relatorio de integridade em .ai/state/workflow-hardening-report.json",
-    "Adicionar agent-adoption-runner para validar disponibilidade do MCP nos tres ambientes",
-    "Registrar evidencias da fase 5 em agent-adoption-report e TASK/HANDOFF ativos",
-    "Encerrar formalmente a fase 5 mantendo TASK-007 e HANDOFF-007 como referencias finais",
+      "Adicionar agent-adoption-runner para validar disponibilidade do MCP nos tres ambientes",
+      "Registrar evidencias da fase 5 em agent-adoption-report e TASK/HANDOFF ativos",
+      "Encerrar formalmente a fase 5 mantendo TASK-007 e HANDOFF-007 como referencias finais",
       "Permitir validacao de estado terminal no workflow-hardening-runner",
       "Adicionar wrapper ./memory para simplificar load/use/add/search de memorias MCP por projeto",
-      "Preferir MCP fixo project-memory via ./memory use quando o objetivo for reduzir namespace no Codex"
+      "Preferir MCP fixo project-memory via ./memory use quando o objetivo for reduzir namespace no Codex",
+      "Abrir uma task operacional nova para push geral dos projetos e investigacao de sincronia com OpenClaw",
+      "Tratar /root/prompt/<projeto> como memoria canonica e usar GitHub apenas como snapshot versionado",
+      "OpenClaw deve acessar a memoria canonica via MCP sobre bind mount ou gateway host; copia sandbox nao deve ser fonte gravavel"
   ],
   "known_blockers": [],
   "last_updated_by": "Codex",
-    "last_updated_at": "2026-04-17T21:46:13-03:00"
+    "last_updated_at": "2026-04-29T22:30:55-03:00"
 }

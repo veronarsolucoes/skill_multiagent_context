@@ -13,6 +13,8 @@
 - `.ai/context/agent-adoption-runner.mjs`: runner de validacao de adocao cross-agent para Codex, Claude e OpenClaw
 - `.ai/context/agent-adoption.md`: guia da fase 5 para adocao de agentes
 - `.ai/context/project-memory-cli.mjs`: CLI local para carregar, buscar e registrar memorias MCP por projeto
+- `.ai/context/github-openclaw-memory-architecture.md`: proposta para GitHub snapshot e MCP OpenClaw sobre memoria canonica
+- `.ai/context/github-memory-push-runner.mjs`: runner seguro para commit/push de memoria ao GitHub
 - `.ai/context/manifests/phase-2-complete.json`: manifesto de transição automática da Fase 2
 - `.ai/context/obsidian-sync-runner.mjs`: runner de sincronização do Obsidian vault
 - `.ai/context/manifests/phase-3-complete.json`: manifesto de transição automática da Fase 3
@@ -32,6 +34,7 @@
 - `.ai/tasks/TASK-006.md`: início da Fase 4 (workflow hardening)
 - `.ai/tasks/TASK-007.md`: execução e encerramento da Fase 5 (adocao pelos agentes)
 - `.ai/tasks/TASK-008.md`: atalho de uso para memoria MCP por projeto
+- `.ai/tasks/TASK-009.md`: push geral dos projetos e correção de sincronia com OpenClaw
 - `.ai/handoffs/HANDOFF-001.md`: continuidade operacional
 - `.ai/handoffs/HANDOFF-002.md`: continuidade após extração e planejamento
 - `.ai/handoffs/HANDOFF-003.md`: continuidade após validação MCP no Codex
@@ -40,6 +43,7 @@
 - `.ai/handoffs/HANDOFF-006.md`: continuidade após conclusão da Fase 3
 - `.ai/handoffs/HANDOFF-007.md`: handoff final de encerramento do projeto
 - `.ai/handoffs/HANDOFF-008.md`: continuidade apos criacao do atalho ./memory
+- `.ai/handoffs/HANDOFF-009.md`: continuidade da task de push geral e sincronia com OpenClaw
 - `.mcp.json`: configuração MCP de projeto para Claude Code
 - `README.md`: documentação humana principal do pacote extraído
 - `memory`: wrapper executavel para `.ai/context/project-memory-cli.mjs`

@@ -9,6 +9,7 @@ const PROJECT_ROOT = path.resolve(
 );
 const DEBUG_LOG = process.env.MCP_DEBUG_LOG || "";
 const TOOL_PREFIX = process.env.TOOL_PREFIX || "";
+const MEMORY_READ_ONLY = /^(1|true|yes)$/i.test(process.env.MEMORY_READ_ONLY || "");
 let debugChunkCount = 0;
 let debugDelimiterMissCount = 0;
 
@@ -347,6 +348,10 @@ async function writeText(relativePath, text) {
 }
 
 async function runTool(name, args) {
+  if (MEMORY_READ_ONLY && (name === "save_task_log" || name === "save_handoff")) {
+    throw new Error("This project-memory MCP is read-only. Point the client to the canonical memory root to write.");
+  }
+
   if (name === "get_project_state") {
     const state = await readJson(".ai/state/current-state.json");
     return { ok: true, state };

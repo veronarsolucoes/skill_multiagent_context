@@ -25,3 +25,6 @@
 - 2026-04-17: fase 5 encerrada formalmente; projeto marcado como concluido.
 - 2026-04-17: workflow-hardening-runner ajustado para validar estado terminal (todas as fases completed).
 - 2026-04-17: criado wrapper `./memory` e CLI `.ai/context/project-memory-cli.mjs` para simplificar load/use/add/search de memorias MCP por projeto.
+- 2026-04-29: aberta a `TASK-009` para push geral dos projetos e investigacao de sincronia com OpenClaw.
+- 2026-04-29: registrada arquitetura para GitHub snapshot, memoria canonica e MCP OpenClaw via bind mount; criado runner inicial `github-memory-push-runner.mjs`.
+- 2026-04-29: validado `github-memory-push-runner.mjs` em dry-run e hardening 41/41 apos sincronizar espelhos Obsidian.

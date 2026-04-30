@@ -47,3 +47,14 @@
   - `./memory use <projeto>`
   - `./memory add <projeto> --name <nome>`
   - `./memory search <projeto> <consulta>`
+
+## Push automatico de memoria para GitHub
+- runner: `.ai/context/github-memory-push-runner.mjs`
+- dry-run:
+  - `node .ai/context/github-memory-push-runner.mjs --project-root <projeto> --dry-run`
+- push real:
+  - `node .ai/context/github-memory-push-runner.mjs --project-root <projeto> --remote origin --branch main --push`
+- politica:
+  - dry-run por padrao
+  - nao executa pull/reset/rebase
+  - falha em divergencia remota para evitar perda de memoria

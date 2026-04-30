@@ -19,3 +19,6 @@
 - 2026-04-17: Fase 5 encerrada formalmente e roadmap finalizado.
 - 2026-04-17: Projeto marcado como concluido.
 - 2026-04-17: evolucao pos-conclusao aplicada com wrapper `./memory` para simplificar acesso a memorias MCP por projeto.
+- 2026-04-29: nova task operacional aberta para push geral dos projetos e investigacao de sincronia com OpenClaw.
+- 2026-04-29: proposta tecnica registrada para eliminar memoria gravavel duplicada e automatizar push da memoria canonica ao GitHub.
+- 2026-04-29: runner de push validado em dry-run; espelhos Obsidian de TASK-009/HANDOFF-009 criados e hardening aprovado.

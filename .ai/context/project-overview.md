@@ -3,7 +3,7 @@ title: Project Overview
 purpose: Visão geral do projeto e referência inicial para qualquer agente.
 status: active
 owner: shared
-last_updated: 2026-04-17
+last_updated: 2026-04-29
 related_files:
   - .ai/context/architecture.md
   - .ai/state/current-state.json
@@ -28,13 +28,13 @@ Descrever a visão geral do projeto, o problema que está sendo resolvido, o sta
 ## Resultado esperado
 Qualquer agente deve ser capaz de entrar no projeto, ler os arquivos âncora e continuar o trabalho sem depender de conversa anterior.
 
-## Estado atual (2026-04-17)
+## Estado atual (2026-04-29)
 - Fase 1 (MCP): concluída
 - Fase 2 (automacao de memory write): concluída
 - Fase 3 (espelhamento no Obsidian): concluída
 - Fase 4 (workflow hardening): concluída
 - Fase 5 (adocao pelos agentes): concluída
 - validacao cross-agent concluida (`.ai/state/agent-adoption-report.json`)
-- projeto encerrado formalmente
-- tarefa final: `TASK-007`
-- handoff final: `HANDOFF-007`
+- projeto retomado para manutencao operacional
+- tarefa operacional ativa: `TASK-009`
+- handoff operacional ativo: `HANDOFF-009`
